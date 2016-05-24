@@ -15,3 +15,6 @@ basket = {} # Holds all item details
 for item in names:
     parts = item.get_text().partition('(')
     basket[parts[0]] = {}
+
+
+    # Test message
