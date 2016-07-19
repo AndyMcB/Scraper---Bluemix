@@ -10,11 +10,27 @@ soup = BeautifulSoup(page.read(), 'html.parser') # Get the soup
 
 items = soup.find_all('li', id='NgMspProductCell') # Find all listed items on page
 names = soup.select('div[class=DetailsWrp] h3 a span') # Traverse the elements in the listed items
+prices = soup.select('div[class=DetailsWrp] div[id=NgMspProductCellPrice] span[class=Price]')
+
 
 basket = {} # Holds all item details
+products = []
 for item in names:
     parts = item.get_text().partition('(')
-    basket[parts[0]] = {}
+    products.append(parts[0])
+    basket[parts[0]] = {} #Add the product name to dictionary as key to empty dict.
 
 
-    # Test message
+priceList = []
+for price in prices:
+    priceList.append(price.get_text())
+
+#WIP
+for i, product in enumerate(products):
+    basket[product]["price"] = priceList[i] #Match prices to products
+    if(i>20):
+        break
+
+
+#for keys in basket.keys():
+#    print(basket.get(keys))
